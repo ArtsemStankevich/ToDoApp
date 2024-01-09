@@ -18,7 +18,7 @@
                 <td>@task.Id</td>
                 <td>@task.Description</td>
                 <td>@task.DueDate.ToShortDateString()</td>
-                <td>@task.Category.Name</td>
+                <td>@ViewBag.CategoryNames[task.CategoryId]</td>
             </tr>
         }
     </tbody>

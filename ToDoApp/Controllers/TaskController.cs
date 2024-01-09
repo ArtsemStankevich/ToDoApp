@@ -7,28 +7,26 @@ using System.Linq;
 public class TaskController : Controller
 {
     private static List<TaskItem> _tasks = new List<TaskItem>();
-    private static List<Category> _categories = new List<Category>();
 
     public IActionResult Index()
     {
-        var tasks = _tasks; // Tutaj przypisz rzeczywiste dane
+        var tasks = _tasks;
+        var categories = CategoryController.categories.ToDictionary(c => c.Id, c => c.Name);
+        ViewBag.CategoryNames = categories;
         return View(tasks);
     }
 
     public IActionResult Create()
     {
-        ViewBag.Categories = _categories.Select(c => new SelectListItem
-        {
-            Value = c.Id.ToString(),
-            Text = c.Name
-        }).ToList();
-        Console.WriteLine(ViewBag.Categories);
+        ViewBag.Categories = new SelectList(CategoryController.categories, "Id", "Name");
+        Console.WriteLine(CategoryController.categories);
         return View();
     }
 
     [HttpPost]
     public IActionResult Create(TaskItem task)
     {
+
         if (ModelState.IsValid)
         {
             _tasks.Add(task);

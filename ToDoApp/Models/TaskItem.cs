@@ -15,5 +15,4 @@ public class TaskItem
     public DateTime DueDate { get; set; }
 
     public int CategoryId { get; set; }
-    public Category Category { get; set; }
 }

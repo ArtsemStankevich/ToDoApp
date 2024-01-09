@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 public class CategoryController : Controller
 {
-    private static List<Category> _categories = new List<Category>();
+    public static List<Category> categories = new List<Category>();
 
     public IActionResult Index()
     {
-        var categories = _categories; // Tutaj przypisz rzeczywiste dane
-        return View(categories);
+        var categoriees = categories; // Tutaj przypisz rzeczywiste dane
+        return View(categoriees);
     }
 
     public IActionResult Create()
@@ -22,7 +22,7 @@ public class CategoryController : Controller
     {
         if (TryValidateModel(category, nameof(category)))
         {
-            _categories.Add(category);
+            categories.Add(category);
             return RedirectToAction("Index", "Task");
         }
         else
