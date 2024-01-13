@@ -1,0 +1,28 @@
+﻿@model List<User>
+
+<h2>User</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Tasks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Username</td>
+                <td>
+                    @foreach (var task in category.Tasks)
+                    {
+                        <p>@task.Description</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

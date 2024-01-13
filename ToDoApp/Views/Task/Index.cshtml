@@ -9,6 +9,7 @@
             <th>Description</th>
             <th>Due Date</th>
             <th>Category</th>
+            <th>User</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
                 <td>@task.Description</td>
                 <td>@task.DueDate.ToShortDateString()</td>
                 <td>@ViewBag.CategoryNames[task.CategoryId]</td>
+                <td>@ViewBag.UserNames[task.UserId]</td>
             </tr>
         }
     </tbody>
