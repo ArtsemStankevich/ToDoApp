@@ -8,7 +8,7 @@ using ToDoApp.Controllers;
 
 public class TaskController : Controller
 {
-    private static List<TaskItem> _tasks = new List<TaskItem>();
+    public static List<TaskItem> _tasks = new List<TaskItem>();
 
     [Authorize]
     public IActionResult Index()
@@ -51,5 +51,36 @@ public class TaskController : Controller
 
 
         return View(task);
+    }
+
+    [Authorize(Roles = "Admin")]
+    public IActionResult Edit(int id)
+    {
+        TaskItem task = _tasks.Where(e => e.Id == id).FirstOrDefault();
+        ViewBag.Categories = new SelectList(CategoryController.categories, "Id", "Name");
+        ViewBag.Users = new SelectList(UserController._users, "Id", "Username");
+        return View(task);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    public IActionResult Edit(TaskItem task, int id)
+    {
+        if (ModelState.IsValid)
+        {
+            _tasks.Where(e => e.Id == id).FirstOrDefault().Description = task.Description;
+            _tasks.Where(e => e.Id == id).FirstOrDefault().DueDate = task.DueDate;
+            _tasks.Where(e => e.Id == id).FirstOrDefault().CategoryId = task.CategoryId;
+            _tasks.Where(e => e.Id == id).FirstOrDefault().UserId = task.UserId;
+        }
+        return RedirectToAction("Index");
+    }
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        TaskItem task = _tasks.Where(e => e.Id == id).FirstOrDefault();
+        _tasks.Remove(task);
+        return RedirectToAction("Index");
     }
 }

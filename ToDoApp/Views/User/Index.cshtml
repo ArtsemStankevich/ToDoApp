@@ -1,7 +1,7 @@
 ﻿@model List<User>
 
 <h2>User</h2>
-
+<a asp-action="Create">Create User</a>
 <table class="table">
     <thead>
         <tr>
@@ -11,17 +11,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var category in Model)
+        @foreach (var user in Model)
         {
             <tr>
-                <td>@category.Id</td>
-                <td>@category.Username</td>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
                 <td>
-                    @foreach (var task in category.Tasks)
+                    @foreach (var task in user.Tasks)
                     {
                         <p>@task.Description</p>
                     }
                 </td>
+                @if (user.Id != 1)
+                {
+                    <td><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
+                    <td>
+                        <form asp-route-id="@user.Id" asp-action="Delete" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                }
             </tr>
         }
     </tbody>

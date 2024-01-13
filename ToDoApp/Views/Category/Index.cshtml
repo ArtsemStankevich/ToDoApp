@@ -1,6 +1,7 @@
 ﻿@model List<Category>
 
 <h2>Categories</h2>
+<a asp-action="Create">Create Category</a>
 
 <table class="table">
     <thead>
@@ -22,6 +23,15 @@
                         <p>@task.Description</p>
                     }
                 </td>
+                @if (category.Id != 1)
+                {
+                <td><a asp-action="Edit" asp-route-id="@category.Id">Edit</a></td>
+                <td>
+                    <form asp-route-id="@category.Id" asp-action="Delete" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                }
             </tr>
         }
     </tbody>

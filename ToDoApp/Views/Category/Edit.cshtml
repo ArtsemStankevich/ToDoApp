@@ -1,9 +1,11 @@
 ﻿@model Category
-
-<h2>Create Category</h2>
+@{
+    ViewData["Title"] = "Edit";
+}
+<h2>Edit Category</h2>
 <a asp-action="Index">List of categories</a>
 
-<form asp-action="Create">
+<form method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
@@ -13,6 +15,6 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Edit" class="btn btn-primary" />
     </div>
 </form>

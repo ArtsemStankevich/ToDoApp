@@ -1,10 +1,11 @@
 ﻿@model TaskItem
-
-<h2>Create Task</h2>
+@{
+    ViewData["Title"] = "Edit";
+}
 <a asp-action="Index">List of Tasks</a>
+<h2>Edit Task</h2>
 
-
-<form asp-action="Create">
+<form method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
@@ -36,6 +37,6 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Create Task" class="btn btn-primary" />
+        <input type="submit" value="Edit Task" class="btn btn-primary" />
     </div>
 </form>
