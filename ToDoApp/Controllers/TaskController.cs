@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ public class TaskController : Controller
 {
     private static List<TaskItem> _tasks = new List<TaskItem>();
 
+    [Authorize]
     public IActionResult Index()
     {
         var tasks = _tasks;
@@ -16,6 +18,7 @@ public class TaskController : Controller
         return View(tasks);
     }
 
+    [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
         ViewBag.Categories = new SelectList(CategoryController.categories, "Id", "Name");
@@ -23,6 +26,7 @@ public class TaskController : Controller
         return View();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public IActionResult Create(TaskItem task)
     {
