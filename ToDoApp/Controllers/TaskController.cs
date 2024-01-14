@@ -59,6 +59,11 @@ public class TaskController : Controller
         TaskItem task = _tasks.Where(e => e.Id == id).FirstOrDefault();
         ViewBag.Categories = new SelectList(CategoryController.categories, "Id", "Name");
         ViewBag.Users = new SelectList(UserController._users, "Id", "Username");
+        ViewBag.DoneStatusOptions = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "true", Text = "Done" },
+            new SelectListItem { Value = "false", Text = "Not done" }
+        };
         return View(task);
     }
 
@@ -68,6 +73,7 @@ public class TaskController : Controller
     {
         if (ModelState.IsValid)
         {
+            _tasks.Where(e => e.Id == id).FirstOrDefault().Done = task.Done;
             _tasks.Where(e => e.Id == id).FirstOrDefault().Description = task.Description;
             _tasks.Where(e => e.Id == id).FirstOrDefault().DueDate = task.DueDate;
             _tasks.Where(e => e.Id == id).FirstOrDefault().CategoryId = task.CategoryId;

@@ -10,7 +10,11 @@ public class TaskItem
     public TaskItem()
     {
         Id = _idCounter++;
+        Done = false;
     }
+
+    public bool Done { get; set; }
+
 
     [Required(ErrorMessage = "Description is required.")]
     [StringLength(100, ErrorMessage = "Description can have up to 100 characters.")]

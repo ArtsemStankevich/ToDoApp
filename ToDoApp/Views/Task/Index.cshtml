@@ -21,6 +21,14 @@
                 <td>@task.DueDate.ToShortDateString()</td>
                 <td>@ViewBag.CategoryNames[task.CategoryId]</td>
                 <td>@ViewBag.UserNames[task.UserId]</td>
+                @if (task.Done == false)
+                {
+                    <td>Not done</td>
+                }
+                else
+                {
+                    <td>Done</td>
+                }
                 <td><a asp-action="Edit" asp-route-id="@task.Id">Edit</a></td>
                 <td>
                     <form asp-route-id="@task.Id" asp-action="Delete" method="post">
