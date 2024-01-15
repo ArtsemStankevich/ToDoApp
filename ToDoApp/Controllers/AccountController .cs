@@ -23,12 +23,14 @@ public async Task<IActionResult> Login(LoginModel model)
         if (model.Username == "admin" && model.Password == "adminpassword")
         {
             await AuthenticateUser("Admin");
-            return RedirectToAction("Index", "Task");
+                TempData["name"] = model.Username;
+            return RedirectToAction("Hello", "Account");
         }
         else if (model.Username == "user" && model.Password == "userpassword")
         {
             await AuthenticateUser("User");
-            return RedirectToAction("Index", "Task");
+                TempData["name"] = model.Username;
+            return RedirectToAction("Hello", "Account");
         }
 
         ModelState.AddModelError(string.Empty, "Invalid login attempt");
@@ -71,5 +73,20 @@ private async Task AuthenticateUser(string role)
     public IActionResult AccessDenied()
     {
         return View();
+    }
+
+    [Authorize]
+    public IActionResult Hello()
+    {
+        string name = TempData["name"] as string;
+        ViewBag.name = name; 
+        return View();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    public IActionResult RedirectToTaskIndex()
+    {
+        return RedirectToAction("Index", "Task");
     }
 }

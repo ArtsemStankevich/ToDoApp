@@ -11,3 +11,17 @@
 .login-margin {
     margin-left: 34%;
 }
+
+
+.hello {
+    margin-top: 25vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+
