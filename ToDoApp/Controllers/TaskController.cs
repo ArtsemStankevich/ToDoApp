@@ -71,6 +71,13 @@ public class TaskController : Controller
     [HttpPost]
     public IActionResult Edit(TaskItem task, int id)
     {
+        ViewBag.Categories = new SelectList(CategoryController.categories, "Id", "Name");
+        ViewBag.Users = new SelectList(UserController._users, "Id", "Username");
+        ViewBag.DoneStatusOptions = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "true", Text = "Done" },
+            new SelectListItem { Value = "false", Text = "Not done" }
+        };
         if (ModelState.IsValid)
         {
             _tasks.Where(e => e.Id == id).FirstOrDefault().Done = task.Done;
@@ -78,8 +85,9 @@ public class TaskController : Controller
             _tasks.Where(e => e.Id == id).FirstOrDefault().DueDate = task.DueDate;
             _tasks.Where(e => e.Id == id).FirstOrDefault().CategoryId = task.CategoryId;
             _tasks.Where(e => e.Id == id).FirstOrDefault().UserId = task.UserId;
+            return RedirectToAction("Index");
         }
-        return RedirectToAction("Index");
+        return View(task);
     }
     [Authorize(Roles = "Admin")]
     [HttpPost]

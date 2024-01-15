@@ -14,7 +14,6 @@ public class AccountController : Controller
     {
         return View();
     }
-
 [AllowAnonymous]
 public async Task<IActionResult> Login(LoginModel model)
 {
