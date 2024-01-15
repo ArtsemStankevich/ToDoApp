@@ -7,4 +7,7 @@
     <welcome-message name="@ViewBag.name"></welcome-message>
     <p>Welcome to the @ViewBag.name  panel.</p>
 
+    <form asp-action="RedirectToTaskIndex" method="post">
+        <button type="submit" class="btn btn-primary">Go to Task Index</button>
+    </form>
 </div>
